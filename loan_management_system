@@ -1,0 +1,11 @@
+loan_amount = float(input("Enter the amount you need: GHc "))
+interest_rate = float(input("Enter the interest rate: "))
+duration = float(input("Enter the duration in months: "))
+
+deducted_amount = (loan_amount * 0.12 * (duration/12))
+take_home_amount = loan_amount - deducted_amount
+monthly_payment = loan_amount / duration
+
+print(f"The amount deducted is {deducted_amount}")
+print("Your loan to take home is: GHc " + str(take_home_amount))
+print(f"You are to pay GHc {monthly_payment:.2f} every month until payment of loan is completed.")
