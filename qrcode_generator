@@ -1,0 +1,34 @@
+import customtkinter as ctk
+import tkinter as tk
+import qrcode
+from PIL import Image, ImageTk
+
+ctk.set_appearance_mode("dark")
+app = ctk.CTk()
+app.geometry("400x550")
+app.title("QR Code Generator")
+
+def generate():
+    text = entry.get()
+    if not text:
+        return
+    qr = qrcode.QRCode(box_size = 10, border = 4)
+    qr.add_data(text)
+    qr.make(fit = True)
+    img = qr.make_image(fill_color = "white", back_color = "black")
+    img = img.resize((300, 300))
+    photo = ImageTk.PhotoImage(img)
+    label.config(image = photo)
+    label.image = photo
+    img.save("qrcode.png")
+
+entry = ctk.CTkEntry(app, placeholder_text = "Enter text or URl", width = 350, height = 40)
+entry.pack(pady = 20)
+
+btn = ctk.CTkButton(app, text = "Generate QR Code", command = generate)
+btn.pack(pady = 10)
+
+label = tk.Label(app, bg = "#212121")
+label.pack(pady = 20)
+
+app.mainloop()
